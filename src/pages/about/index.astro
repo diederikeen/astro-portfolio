@@ -5,7 +5,7 @@ import MainLayout from "../../layouts/MainLayout.astro";
 <MainLayout title="About">
   <div class="container">
     <section>
-      <div class="intro">
+      <div class="image-content">
         <div>
           <div class="image" style="background-image: url(/me.jpg)"></div>
         </div>
@@ -40,52 +40,62 @@ import MainLayout from "../../layouts/MainLayout.astro";
 
       <h2>Casual information</h2>
       <p>
-        In my 10 year old career I've witnessed the grow of Front-end
-        Development. In the early stages of my career I mostly used gulp in
-        combination with Sass / Less and now I'm fully invested in the React
-        ecosystem.
+        When I do have some free time, you can probably find me at the gym. You
+        know, all that sitting and stuff, its nice to get some movement in as
+        well. Besides that I have a huge passion for watches, vintage or new,
+        doesn't matter to me, but it combines two hobbies of mine, design and
+        development.
       </p>
-      <p>
-        I've been working with React and TypeScript for almost 4 years now.
-        During this time period I've also worked with a lot of other tools, just
-        to name a few: GraphQL, ReactQuery, Redux, PostCSS, Tailwind, Radix,
-        Stitches, StyledComponents, StitchesJs and more.
-      </p>
+
+      <div class="image-content">
+        <div>
+          <p>
+            I do have a race bike, which I probably could use more, but it's
+            still beautiful to look at I guess. I run, not for a specific
+            reason, but it is a nice way to clear my head and stay fit. Then
+            there is my little dog Ziggy, who needs a shit ton of attention so
+            that keeps me busy during the day as well.
+          </p>
+        </div>
+        <div>
+          <div class="image" style="background-image: url(/ziggy.jpg)"></div>
+        </div>
+
+        <div class="spacer"></div>
+      </div>
+
+      <style>
+        .image-content {
+          display: flex;
+          gap: 32px;
+          flex-direction: column-reverse;
+        }
+
+        @media screen and (min-width: 768px) {
+          .image-content {
+            flex-direction: row;
+            align-items: center;
+          }
+        }
+
+        .image-content .image {
+          width: 230px;
+          height: 230px;
+          border-radius: 24px;
+          background-size: cover;
+          background-position: center;
+        }
+
+        h2 {
+          margin: 24px 0 12px;
+        }
+
+        @media screen and (min-width: 768px) {
+          h2 {
+            margin: 36px 0 24px;
+          }
+        }
+      </style>
     </section>
   </div>
-
-  <div class="spacer"></div>
 </MainLayout>
-
-<style>
-  .intro {
-    display: flex;
-    gap: 32px;
-    flex-direction: column-reverse;
-  }
-
-  @media screen and (min-width: 768px) {
-    .intro {
-      flex-direction: row;
-      align-items: center;
-    }
-  }
-
-  .intro .image {
-    width: 230px;
-    height: 230px;
-    border-radius: 24px;
-    background-size: cover;
-    background-position: center;
-  }
-
-  h2 {
-    margin: 24px 0 12px;
-  }
-
-  @media screen and (min-width: 768px) {
-    h2 {
-      margin: 36px 0 24px;
-    }
-  }
-</style>
