@@ -1,0 +1,44 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import MobileNav from "../components/MobileNav.astro";
+import { SITE_TITLE } from "../consts";
+const props = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <BaseHead
+      title={`${SITE_TITLE} ${props.title ? `| ${props.title}` : ""}`}
+      description={props.description}
+    />
+  </head>
+
+  <body>
+    <Header />
+    <MobileNav />
+    <div id="content-wrapper">
+      <div class="spacer"></div>
+      <main>
+        <slot />
+      </main>
+    </div>
+    <style>
+      .mobile-menu-active {
+        overflow: hidden;
+      }
+
+      #content-wrapper {
+        transition: all 300ms ease-out;
+      }
+
+      @media screen and (max-width: 769px) {
+        .mobile-menu-active #content-wrapper {
+          transform: translateX(-60%);
+          opacity: 0.3;
+        }
+      }
+    </style>
+  </body>
+</html>

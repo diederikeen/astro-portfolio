@@ -1,0 +1,11 @@
+---
+import Intro from "../components/Intro.astro";
+import MainLayout from "../layouts/MainLayout.astro";
+import BlogOverview from "../components/BlogOverview.astro";
+---
+
+<MainLayout title="Home">
+  <Intro />
+  <div class="spacer"></div>
+  <BlogOverview title="Recent blog posts" />
+</MainLayout>

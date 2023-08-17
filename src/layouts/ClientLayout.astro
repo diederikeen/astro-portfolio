@@ -1,0 +1,36 @@
+---
+import type { CollectionEntry } from "astro:content";
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+
+type Props = CollectionEntry<"clients">["data"];
+
+const { title, description, heroImage } = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <BaseHead title={title} description={description} />
+  </head>
+
+  <body>
+    <Header />
+    <main>
+      <div class="container">
+        <article>
+          <div class="prose">
+            <h1>{title}</h1>
+          </div>
+          <slot />
+        </article>
+      </div>
+    </main>
+    <style>
+      h1 {
+        margin: 54px 0 54px 0;
+        text-align: center;
+        font-size: 42px;
+      }
+    </style>
+  </body>
+</html>

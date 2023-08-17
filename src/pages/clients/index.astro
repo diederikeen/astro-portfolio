@@ -1,0 +1,93 @@
+---
+import { getCollection } from "astro:content";
+import MainLayout from "../../layouts/MainLayout.astro";
+
+const clients = await getCollection("clients");
+---
+
+<MainLayout title="Clients">
+  <div class="container">
+    <p>
+      These are the companies I've worked with for in the past years. More in
+      depth detail / case pages will come soon, so stay tuned 🤞
+    </p>
+    <h2>Client list</h2>
+
+    <div class="client-list">
+      {
+        clients
+          .sort((a, b) => b.data.startDate - a.data.startDate)
+          .map((client) => (
+            <a class="client" href={`/client/${client.slug}`}>
+              <h3>{client.data.title}</h3>
+              <p>{client.data.description}</p>
+
+              <span>coming soon</span>
+            </a>
+          ))
+      }
+    </div>
+  </div>
+</MainLayout>
+
+<style>
+  h2 {
+    position: relative;
+    padding: 0 0 0 24px;
+    line-height: 1;
+    margin: 48px 0 32px;
+  }
+
+  h2:before {
+    content: "";
+    position: absolute;
+    top: 100%;
+    transform: translateY(-100%);
+    left: 0;
+    width: 18px;
+    height: 4px;
+    background-color: var(--color-primary);
+  }
+
+  .client-list {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    margin-top: 34px;
+  }
+
+  .client {
+    display: block;
+    border-radius: 12px;
+    border: 1px solid transparent;
+    transition: all 250ms ease-out;
+    padding: 18px 24px 24px;
+    color: inherit;
+    text-decoration: none;
+    pointer-events: none;
+  }
+
+  .client:hover {
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    background-color: rgba(0, 0, 0, 0.3);
+    transform: translateY(-2px);
+    box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.2);
+  }
+
+  .client h3 {
+    margin: 0 0 12px;
+    position: relative;
+    display: inline-block;
+  }
+
+  .client p {
+    font-size: 14px;
+    margin: 0 0 14px;
+  }
+
+  .client span {
+    font-size: 10px;
+    font-weight: 900;
+    text-transform: uppercase;
+  }
+</style>

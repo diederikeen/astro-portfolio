@@ -1,0 +1,131 @@
+---
+import HeaderLink from "./HeaderLink.astro";
+import { Icon } from "astro-icon";
+
+const r = Math.random().toString();
+---
+
+<header>
+  <div class="container">
+    <h1>Ricky's<span>.</span></h1>
+    <nav>
+      <HeaderLink href="/"><Icon name="home" />Home</HeaderLink>
+      <HeaderLink href="/clients"><Icon name="briefcase" />Clients</HeaderLink>
+      <HeaderLink href="/blog"><Icon name="books" />Blog</HeaderLink>
+      <HeaderLink href="/about"><Icon name="user" />About</HeaderLink>
+    </nav>
+
+    <button class="toggle-menu" id={`toggle-menu`}>
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</header>
+
+<style>
+  header h1 span {
+    color: var(--color-primary);
+  }
+
+  header {
+    height: 80px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #011017;
+    z-index: 9;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.5);
+  }
+
+  header .container {
+    display: flex;
+    align-items: center;
+  }
+
+  button {
+    margin-left: auto;
+    width: 38px;
+    height: 38px;
+    border-radius: 8px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    background-color: rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    justify-content: center;
+  }
+
+  button span {
+    border-radius: 3px;
+    background-color: white;
+    height: 3px;
+    width: 100%;
+    display: block;
+  }
+
+  button:active {
+    border-color: white;
+  }
+
+  @media screen and (min-width: 768px) {
+    button {
+      display: none;
+    }
+  }
+
+  nav {
+    margin-left: auto;
+    display: none;
+    align-items: center;
+    gap: 12px;
+  }
+
+  @media screen and (min-width: 768px) {
+    nav {
+      display: flex;
+    }
+  }
+
+  nav a {
+    color: inherit;
+    font-size: 12px;
+    background: rgba(0, 0, 0, 0.4);
+    padding: 12px 20px;
+    border-radius: 12px;
+    text-transform: uppercase;
+    font-weight: 800;
+    text-decoration: none;
+    transition: all 126ms ease-out;
+    transform: scale(0.9);
+    display: flex;
+    align-items: center;
+  }
+
+  nav a svg {
+    width: 20px;
+    margin-right: 6px;
+  }
+
+  nav a:hover {
+    transform: scale(1);
+    transform-origin: center;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 1);
+  }
+
+  nav .active {
+    background-color: var(--color-primary);
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 1);
+  }
+</style>
+
+<script>
+  document.addEventListener("astro:load", () => {
+    const button = document.getElementById(`toggle-menu`);
+
+    button.addEventListener("click", () => {
+      document.body.classList.toggle("mobile-menu-active");
+    });
+  });
+</script>

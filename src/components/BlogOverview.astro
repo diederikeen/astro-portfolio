@@ -1,0 +1,130 @@
+---
+import { getCollection } from "astro:content";
+
+const blogPosts = await getCollection("blog");
+
+const props = Astro.props;
+---
+
+<section>
+  <div class="container">
+    <h2>{props.title}</h2>
+
+    <div class="blog-overview">
+      {
+        blogPosts.map((post) => (
+          <a href={`/blog/${post.slug}`}>
+            <article>
+              <h3>{post.data.title}</h3>
+              <p>{post.data.description}</p>
+              <footer>
+                {post.data.tags.map((tag) => (
+                  <span class={`tag ${tag.toLowerCase().trim()}`}>{tag}</span>
+                ))}
+              </footer>
+            </article>
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  h2 {
+    position: relative;
+    padding: 0 0 0 24px;
+    line-height: 1;
+    margin-bottom: 32px;
+  }
+
+  h2:before {
+    content: "";
+    position: absolute;
+    top: 100%;
+    transform: translateY(-100%);
+    left: 0;
+    width: 18px;
+    height: 4px;
+    background-color: var(--color-primary);
+  }
+
+  .blog-overview {
+    display: flex;
+    flex-direction: column;
+    gap: 34px;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  a:visited {
+    color: #bbb;
+  }
+
+  article {
+    border-radius: 12px;
+    border: 1px solid transparent;
+    transition: all 250ms ease-out;
+    padding: 18px 24px;
+  }
+
+  article:hover {
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    background-color: rgba(0, 0, 0, 0.3);
+    transform: translateY(-2px);
+    box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.2);
+  }
+
+  article h3,
+  article p {
+    margin: 0;
+  }
+
+  article h3 {
+    margin: 0 0 12px;
+    font-size: 18px;
+  }
+
+  article p {
+    font-size: 14px;
+    line-height: 24px;
+  }
+
+  @media screen and (min-width: 768px) {
+    article p {
+      font-size: 16px;
+      line-height: 28px;
+    }
+  }
+
+  article footer {
+    display: flex;
+    gap: 14px;
+    margin-top: 24px;
+  }
+
+  article .tag {
+    font-size: 12px;
+    padding: 4px 8px;
+    border-radius: 20px;
+    background: var(--color-primary);
+    border: dark-grey;
+    color: white;
+    font-weight: 800;
+  }
+
+  article .tag.development {
+    background: #0652dd;
+  }
+
+  article .tag.typescript {
+    background-color: #2ecc71;
+  }
+
+  article .tag.full-stack {
+    background-color: #16a085;
+  }
+</style>
